@@ -36,13 +36,23 @@ var intervallo = setInterval(function(){
 
 
 function indovina() {
-    //tramite prompt chiedo all'utente di inserire cinque numeri, uno alla volta, e li metto in un array
+    //tramite prompt chiedo all'utente di inserire cinque numeri, uno alla volta, con un ciclo while che controlla che il numero non sia già stato inserito, e li metto in un array
     var cinqueNumeriInput = [];
-
-    for (var i = 0; i < 5; i++) {
+    var numeriInseriti = 0;
+    
+    while (numeriInseriti != 5) {
+        var numeroInput = Number(prompt('Inserisci un numero'));
+        if (!cinqueNumeriInput.includes(numeroInput)) {
+            cinqueNumeriInput.push(numeroInput);
+            numeriInseriti++;
+        } else {
+            alert('numero già inserito')
+        }
+    }
+    /* for (var i = 0; i < 5; i++) {
         var numeroInput = Number(prompt('Inserisci un numero'));
         cinqueNumeriInput.push(numeroInput);
-    }
+    } */
 
     //creo un ciclo for che controlla se i numeri inseriti sono nell'array dei numeri generati casualmente, e li mette in un array, aumentano la variabile punteggio di 1
     var punteggio = 0;
@@ -54,10 +64,8 @@ function indovina() {
             numeriIndovinati.push(cinqueNumeriInput[i]);
         }
     }
+    
 
     //stampo a schermo il punteggio e i numeri indovinati
     document.getElementById('testo').innerHTML = ('Hai indovinato ' + punteggio + ' numeri: ' + numeriIndovinati);
 }
-
-// da fare:
-//l'utente non può inserire lo stesso numero
